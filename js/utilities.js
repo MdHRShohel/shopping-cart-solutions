@@ -44,3 +44,34 @@ function updatePhoneTotalPrice(newPhoneNumber){
     const phoneTotalElement = document.getElementById('phone-total');
     phoneTotalElement.innerText = phoneTotalPrice;
 }
+////////////////////////////////////////////
+function setTextElementById(elementId, value){
+    const subTotalElement = document.getElementById(elementId);
+    subTotalElement.innerText = value;
+}
+
+function getTextElementValueByID(elementId){
+     //calculate total 
+    const phoneTotalElement = document.getElementById(elementId);
+    const currentPhoneTotalString = phoneTotalElement.innerText;
+    const currentPhoneTotal = parseInt(currentPhoneTotalString);
+    return currentPhoneTotal;
+}
+
+function calculateSubTotal(){
+    const currentPhoneTotal = getTextElementValueByID('phone-total');
+   const currentCaseTotal = getTextElementValueByID('case-total');
+   const currentSubTotal = currentPhoneTotal + currentCaseTotal;
+
+   setTextElementById('sub-total', currentSubTotal);
+   //calculate Tax
+   const taxAmountString = (currentSubTotal * 0.1).toFixed(2);
+   const taxAmount = parseFloat(taxAmountString);
+
+   setTextElementById('tax-amount',taxAmount);
+
+   const finalAmount = currentSubTotal + taxAmount;
+
+   setTextElementById('final-total',finalAmount)
+
+}
